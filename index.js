@@ -32,9 +32,10 @@ const cityIdForm = document.getElementById('cityIdForm');
 const coordsForm = document.getElementById('coordsForm');
 
 function updateWeatherResults(w) {
+  const now = new Date();
   resultDiv.style.display = 'block';
   cityEle.innerHTML = `${w.locationName}, ${w.country}`;
-  timeEle.innerHTML = prettyTime(w.datetime);
+  timeEle.innerHTML = `${new Date(w.datetime*1000).toLocaleDateString([], {weekday: 'short', month: 'short', day: 'numeric'})} at ${prettyTime(w.datetime)}`;
   weatherEle.innerHTML = w.weather;
   descEle.innerHTML = w.desc;
   [...iconEles].forEach( (iconEle) => {
@@ -47,8 +48,16 @@ function updateWeatherResults(w) {
   pressureEle.innerHTML = `${w.pressure} hPa`;
   humidityEle.innerHTML = `${w.humidity}%`;
   visibilityEle.innerHTML = `${(w.visibility/1000).toFixed(1)} km`;
-  sunsetEle.innerHTML = prettyTime(w.sunset);
-  sunriseEle.innerHTML = prettyTime(w.sunrise);
+  if (w.sunset < now) {
+    sunsetEle.innerHTML = `<b>Sunset was at:</b> ${prettyTime(w.sunset)}`;
+  } else {
+    sunsetEle.innerHTML = `<b>Sunset is at:</b> ${prettyTime(w.sunset)}`;
+  }
+  if (w.sunset < now) {
+    sunriseEle.innerHTML = `<b>Sunrise was at:</b> ${prettyTime(w.sunrise)}`;
+  } else {
+    sunriseEle.innerHTML = `<b>Sunrise is at:</b> ${prettyTime(w.sunrise)}`;
+  }
   coordsEle.innerHTML = `${w.lon.toFixed(3)}, ${w.lat.toFixed(3)}`;
 }
 
