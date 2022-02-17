@@ -1,3 +1,3 @@
-# [Weather API](https://nicc.io/js-weather-api)
+# [Weather App](https://nicc.io/weather)
 
-Try it out at [nicc.io/js-weather-api](https://nicc.io/js-weather-api)
+Try it out at [nicc.io/weather](https://nicc.io/weather)

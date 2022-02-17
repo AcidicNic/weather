@@ -116,20 +116,21 @@ coordsForm.addEventListener('submit', (e) => {
   .catch( (err) => console.log(err) );
 });
 
+// Get location from local storage (default is SF)
 const localStorage = window.localStorage;
-
 let defaultLocation = localStorage.getItem('location');
-
 if (!defaultLocation) {
-  weatherApi.getWeatherByCity('san francisco')
-  .then( (weatherObj) => {
-    updateWeatherResults(weatherObj);
-  })
-  .catch( (err) => console.log(err) );
-} else {
+  defaultLocation = 'san francisco';
+}
+
+function updateWeather() {
   weatherApi.getWeatherByCity(defaultLocation)
   .then( (weatherObj) => {
     updateWeatherResults(weatherObj);
   })
   .catch( (err) => console.log(err) );
 }
+updateWeather();
+
+// update the weather into every 5 minutes
+setInterval(updateWeather, 5 * 60000);

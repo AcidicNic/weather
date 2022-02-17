@@ -31,8 +31,6 @@ body {
 .form > button {
   padding: 0 .7em;
   background-color: #212529;
-
-  background-image: url(search.png);
   color: #fff;
   font-size: 1em;
   border: 1px solid;
