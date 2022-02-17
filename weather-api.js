@@ -8,11 +8,12 @@
 export class WeatherInterface {
 	constructor(jsonRes, units) {
 		this.locationName = jsonRes.name;
+		this.country = jsonRes.sys.country;
 		this.timezone = jsonRes.timezone;
 		this.datetime = jsonRes.dt;
 		this.units = units;
 
-		this.type = jsonRes.weather[0].main;
+		this.weather = jsonRes.weather[0].main;
 		this.desc = jsonRes.weather[0].description;
 		this.iconUrl = `http://openweathermap.org/img/wn/${jsonRes.weather[0].icon}@2x.png`;
 
@@ -23,6 +24,9 @@ export class WeatherInterface {
 		this.pressure = jsonRes.main.pressure;
 		this.humidity = jsonRes.main.humidity;
 		this.visibility = jsonRes.visibility;
+
+		if (units === 'imperial') this.tempUnit = '°F';
+		else this.tempUnit = '°C';
 
 		this.sunset = jsonRes.sys.sunset;
 		this.sunrise = jsonRes.sys.sunrise;
@@ -53,7 +57,7 @@ export class WeatherAPI {
 	setApiKey(apiKey) {
 		this.apiKey = apiKey || '';
 	}
-	
+
 	/**
 	 * Set options
 	 * @param {Object} options { units='imperial', lang='en' }
@@ -139,12 +143,26 @@ export class WeatherAPI {
 			if (weatherJson.cod !== 200) {
 				return Promise.reject({...err, data: weatherJson});
 			}
-			return await new WeatherInterface(weatherJson);
+			return await new WeatherInterface(weatherJson, this.units);
 		} catch (err) {
 			console.log(err);
 			return Promise.reject(err);
 		}
 	}
+}
+
+export const prettyTime = (datetime) => {
+	const prettyTime = new Date(datetime*1000)
+		.toLocaleTimeString([], {
+			hour: '2-digit',
+			minute: '2-digit',
+			hour12: true,
+		});
+	
+	if (prettyTime.substring(0, 1) === '0') {
+		return prettyTime.substring(1);
+	}
+	return prettyTime
 }
 
 /**

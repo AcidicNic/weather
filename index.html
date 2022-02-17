@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Ms Merriweather</title>
+    <title>✨Weather ✨</title>
     <style>
       body, html {
         height: 100%;
@@ -16,22 +16,20 @@
         align-items: center;
       }
 
-      h1, p {
-        margin: 0 0 1rem 0;
-      }
-
       .container {
-        width: 400px;
+        width: 80%;
         display: flex;
         flex-direction: column;
-        border: 1px
       }
 
-      #form {
+      .form {
         display: flex;
+        margin: auto;
+        margin-bottom: .5em;
+        width: 50%;
       }
 
-      #form > input {
+      .form > input {
         flex: 1;
         padding: 1em;
         font-size: 1em;
@@ -41,7 +39,7 @@
         border-right: none;
       }
 
-      #form > button {
+      .form > button {
         padding: 0 1em;
         background-color: rgb(106, 177, 238);
         color: #fff;
@@ -52,23 +50,108 @@
         border: 1px solid #000;
         border-left: none;
       }
+
+      .form > button:hover {
+        cursor: pointer;
+      }
+
+      .icon {
+        max-width: 2em;
+        max-height: 2em;
+      }
+
+      #title > * {
+        vertical-align: middle;
+      }
+      #title {
+        margin-bottom: 0px;
+      }
+
+      #results {
+        text-align: center;
+      }
+
+      #results {
+        display: none;
+      }
+
     </style>
   </head>
   <body>
     <div class='container'>
-      <h1 id='temp'>
-        <!--Temp -->
-      </h1>
-      <p id='desc'>
-        <!-- description -->
-      </p>
-      <form id='form'>
+      <div id='results'>
+        <h1 id='title'>
+          <img class='icon'></img>
+          <span id='city'></span>
+          <img class='icon'></img>
+        </h1>
+          <b><span id='weather'></span></b> (<span id='desc'></span>)
+        <p>
+          <b>Temp:</b> <span id='temp'></span>
+        </p>
+        <p>
+          <b>Feels Like:</b> <span id='feelsLike'></span>
+        </p>
+        <p>
+          <b>Today's Temps:</b> <span id='tempMin'></span> - <span id='tempMax'></span>
+        </p>
+        <p>
+          <b>Pressure:</b> <span id='pressure'></span>
+        </p>
+        <p>
+          <b>Humidity:</b> <span id='humidity'></span>
+        </p>
+        <p>
+          <b>Visibility:</b> <span id='visibility'></span>
+        </p>
+        <p>
+          <b>Sunrise:</b> <span id='sunrise'></span>
+        </p>
+        <p>
+          <b>Sunset:</b> <span id='sunset'></span>
+        </p>
+        <p>
+          <b>Lon, Lat:</b> <span id='coords'></span>
+        </p>
+        <p>
+          <b>Last Updated:</b> <span id='datetime'></span>
+        </p>
+      </div>
+      <form class='form' id='cityForm'>
         <input 
-          id='zip' 
+          id='cityInput' 
+          type='text' 
+          placeholder='city, state, country'
+          title='Please Enter a valid city'
+        >
+        <button type='submit'>Search</button>
+      </form>
+      <form class='form' id='zipForm'>
+        <input 
+          id='zipInput' 
           type='number' 
           placeholder='zip code'
           title='Please Enter a valid Zip Code'
           pattern='^\d{5}(?:[-\s]\d{4})?$'
+        >
+        <button type='submit'>Search</button>
+      </form>
+      <form class='form' id='coordsForm'>
+        <input 
+          id='coordsInput' 
+          type='text' 
+          placeholder='lon, lat'
+          title='Please enter a valid longitude, latitude pair'
+          pattern='^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$'
+        >
+        <button type='submit'>Search</button>
+      </form>
+      <form class='form' id='cityIdForm'>
+        <input 
+          id='cityIdInput' 
+          type='number' 
+          placeholder='city Id'
+          title='Please Enter a valid City Id'
         >
         <button type='submit'>Search</button>
       </form>
