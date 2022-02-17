@@ -72,6 +72,7 @@ zipForm.addEventListener('submit', (e) => {
   .then( (weatherObj) => {
     updateWeatherResults(weatherObj);
     localStorage.setItem('location', weatherObj.locationName);
+    zipInput.value = '';
   })
   .catch( (err) => console.log(err) );
 });
@@ -84,6 +85,7 @@ cityForm.addEventListener('submit', (e) => {
   .then( (weatherObj) => {
     updateWeatherResults(weatherObj);
     localStorage.setItem('location', weatherObj.locationName);
+    cityInput.value = '';
   })
   .catch( (err) => console.log(err) );
 });
@@ -96,6 +98,7 @@ cityIdForm.addEventListener('submit', (e) => {
   .then( (weatherObj) => {
     updateWeatherResults(weatherObj);
     localStorage.setItem('location', weatherObj.locationName);
+    cityIdInput.value = '';
   })
   .catch( (err) => console.log(err) );
 });
@@ -108,6 +111,7 @@ coordsForm.addEventListener('submit', (e) => {
   .then( (weatherObj) => {
     updateWeatherResults(weatherObj);
     localStorage.setItem('location', weatherObj.locationName);
+    coordsInput.value = '';
   })
   .catch( (err) => console.log(err) );
 });
