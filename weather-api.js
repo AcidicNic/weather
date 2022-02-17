@@ -31,11 +31,35 @@ export class WeatherInterface {
 	}
 } 
 
+export class WeatherAPI {
+	/**
+	 * OpenWeatherMap API Wrapper Constructor
+	 * @param  {String} apiKey your OpenWeatherMap API key
+	 * @param {Object} options { units='imperial', lang='en' }
+	 */
+	constructor(apiKey, options = {}) {
+		this.apiKey = apiKey;
+		this.units = options.units || 'imperial';
+		this.lang = options.lang || 'en';
+	}
+	
+	async getWeather(zip) {
+		const url = `https://api.openweathermap.org/data/2.5/weather?appid=${this.apiKey}&units=${this.units}&lang=${this.lang}&zip=${zip}`;
+		const res = await fetch(url);
+		const weatherJson = await res.json();
+		// Handle Err
+		if (weatherJson.cod !== 200) {
+			return Promise.reject({ name: 'Invalid Zip Code', message: 'Try Again' });
+		}
+		return await new WeatherInterface(weatherJson);
+	}
+}
+
 /**
  * get Weather via callback
  */
-export function getWeatherCallback(apiKey, zip, weatherCallback, errCallback, units='imperial') {
-	const path = `https://api.openweathermap.org/data/2.5/weather?appid=${apiKey}&zip=${zip}&units=${units}`;
+export function getWeatherCallback(apiKey, zip, weatherCallback, errCallback, units='imperial', lang='en') {
+	const path = `https://api.openweathermap.org/data/2.5/weather?appid=${apiKey}&lang=${lang}&units=${units}&zip=${zip}`;
 	fetch(path)
 		.then(res => res.json())
 		.then(weatherJson => {
@@ -52,8 +76,8 @@ export function getWeatherCallback(apiKey, zip, weatherCallback, errCallback, un
 /**
  * get Weather via promise
  */
-export const getWeather = async (apiKey, zip, units='imperial') => {
-	const path = `https://api.openweathermap.org/data/2.5/weather?appid=${apiKey}&zip=${zip}&units=${units}`;
+export const getWeather = async (apiKey, zip, units='imperial', lang='en') => {
+	const path = `https://api.openweathermap.org/data/2.5/weather?appid=${apiKey}&lang=${lang}&units=${units}&zip=${zip}`;
 	const res = await fetch(path);
 	const weatherJson = await res.json();
 	// Handle Err

@@ -1,7 +1,7 @@
 import {
   getWeatherCallback,
   getWeather,
-
+  WeatherAPI
 } from './weather-api.js';
 
 // Get Element references
@@ -24,11 +24,17 @@ formEl.addEventListener('submit', (e) => {
   e.preventDefault();
   const zip = zipInput.value;
 
-  getWeatherCallback('a76a06211fa14de22228d74eda2fa7bc', zip, updateWeatherResults, handleErr);
-
+  // getWeatherCallback('a76a06211fa14de22228d74eda2fa7bc', zip, updateWeatherResults, handleErr);
   // getWeather('a76a06211fa14de22228d74eda2fa7bc', zip)
   // .then( (weatherObj) => {
   //   updateWeatherResults(weatherObj);
   // })
   // .catch( (err) => handleErr(err) );
+
+  const weatherApi = new WeatherAPI('a76a06211fa14de22228d74eda2fa7bc');
+  weatherApi.getWeather(zip)
+  .then( (weatherObj) => {
+    updateWeatherResults(weatherObj);
+  })
+  .catch( (err) => handleErr(err) );
 });
