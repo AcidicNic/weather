@@ -83,12 +83,17 @@
       const formEl = document.getElementById('form')
       const zipInput = document.getElementById('zip')
 
+      function callback(res) {
+        tempEl.innerHTML = res.main.temp;
+	  	  descEl.innerHTML = res.weather[0].description;
+      }
+
       // Define event listeners
       formEl.addEventListener('submit', (e) => {
-        e.preventDefault()
-        const zip = zipInput.value
-        getWeather('a76a06211fa14de22228d74eda2fa7bc', zip)
-      })
+        e.preventDefault();
+        const zip = zipInput.value;
+        getWeather('a76a06211fa14de22228d74eda2fa7bc', zip, callback);
+      });
     </script>
   </body>
 </html>
