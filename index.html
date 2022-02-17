@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>✨Weather ✨</title>
-    <link rel="stylesheet" href="index.css">
+    <title>Weather</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/index.css">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/img/favicon/site.webmanifest">
   </head>
   <body>
     <div class='container'>
@@ -50,8 +56,8 @@
         <input 
           id='cityInput' 
           type='text' 
-          placeholder='city, state, country'
-          title='Please Enter a valid city'
+          placeholder='City, State, Country'
+          title='Please enter a valid city'
         >
         <button type='submit'>Search</button>
       </form>
@@ -59,8 +65,8 @@
         <input 
           id='zipInput' 
           type='number' 
-          placeholder='zip code'
-          title='Please Enter a valid Zip Code'
+          placeholder='Zip Code'
+          title='Please enter a valid Zip Code'
           pattern='^\d{5}(?:[-\s]\d{4})?$'
         >
         <button type='submit'>Search</button>
@@ -69,7 +75,7 @@
         <input 
           id='coordsInput' 
           type='text' 
-          placeholder='lon, lat'
+          placeholder='Lon, Lat'
           title='Please enter a valid longitude, latitude pair'
           pattern='^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$'
         >
@@ -79,12 +85,13 @@
         <input 
           id='cityIdInput' 
           type='number' 
-          placeholder='city Id'
-          title='Please Enter a valid City Id'
+          placeholder='City Id'
+          title='Please enter a valid City Id'
         >
         <button type='submit'>Search</button>
       </form>
     </div>
-    <script src="index.js" type="module"></script>
+
+    <script src="js/index.js" type="module"></script>
   </body>
 </html>
