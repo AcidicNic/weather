@@ -1,14 +1,12 @@
 import {
-  getWeatherCallback,
-  getWeather,
-  WeatherAPI
+  WeatherAPI,
 } from './weather-api.js';
 
 // Get Element references
-const tempEl = document.getElementById('temp')
-const descEl = document.getElementById('desc')
-const formEl = document.getElementById('form')
-const zipInput = document.getElementById('zip')
+const tempEl = document.getElementById('temp');
+const descEl = document.getElementById('desc');
+const formEl = document.getElementById('form');
+const zipInput = document.getElementById('zip');
 
 function updateWeatherResults(weatherObj) {
   tempEl.innerHTML = weatherObj.type;
@@ -19,20 +17,14 @@ function handleErr(err) {
   descEl.innerHTML = err.message;
 }
 
+const weatherApi = new WeatherAPI('a76a06211fa14de22228d74eda2fa7bc');
+
 // Define event listeners
 formEl.addEventListener('submit', (e) => {
   e.preventDefault();
   const zip = zipInput.value;
 
-  // getWeatherCallback('a76a06211fa14de22228d74eda2fa7bc', zip, updateWeatherResults, handleErr);
-  // getWeather('a76a06211fa14de22228d74eda2fa7bc', zip)
-  // .then( (weatherObj) => {
-  //   updateWeatherResults(weatherObj);
-  // })
-  // .catch( (err) => handleErr(err) );
-
-  const weatherApi = new WeatherAPI('a76a06211fa14de22228d74eda2fa7bc');
-  weatherApi.getWeather(zip)
+  weatherApi.getWeatherByZip(zip)
   .then( (weatherObj) => {
     updateWeatherResults(weatherObj);
   })
